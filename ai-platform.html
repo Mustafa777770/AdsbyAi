@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Advertising Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'gray-900': '#1a202c',
+                        'gray-800': '#2d3748',
+                        'gray-700': '#4a5568',
+                        'gray-600': '#718096',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .rtl { direction: rtl; }
+        .ltr { direction: ltr; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="max-w-4xl mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-8">منصة الإعلانات بالذكاء الاصطناعي</h1>
+        
+        <!-- Upload Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="border-2 border-dashed border-gray-600 rounded-xl p-6 text-center">
+                <h3 class="text-lg font-semibold mb-4">تحميل صورة المنتج</h3>
+                <input type="file" id="productImage" accept="image/*" class="hidden">
+                <button onclick="document.getElementById('productImage').click()" 
+                        class="bg-white text-gray-900 px-4 py-2 rounded-lg">
+                    اختر صورة
+                </button>
+                <div id="productPreview" class="mt-4"></div>
+            </div>
+            
+            <div class="border-2 border-dashed border-gray-600 rounded-xl p-6 text-center">
+                <h3 class="text-lg font-semibold mb-4">تحميل صورة الخلفية</h3>
+                <input type="file" id="backgroundImage" accept="image/*" class="hidden">
+                <button onclick="document.getElementById('backgroundImage').click()" 
+                        class="bg-white text-gray-900 px-4 py-2 rounded-lg">
+                    اختر صورة
+                </button>
+                <div id="backgroundPreview" class="mt-4"></div>
+            </div>
+        </div>
+        
+        <!-- Description -->
+        <div class="mb-6">
+            <label class="block text-lg font-semibold mb-2">صف التفاعل المطلوب</label>
+            <textarea id="description" rows="3" 
+                      class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg text-white"
+                      placeholder="مثال: ضع الحقيبة على رأس المرأة في الصورة الثانية"></textarea>
+        </div>
+        
+        <!-- Generate Button -->
+        <div class="text-center mb-8">
+            <button onclick="generateImage()" 
+                    id="generateBtn"
+                    class="bg-white text-gray-900 px-8 py-3 rounded-xl font-bold text-lg hover:bg-gray-200 transition-colors">
+                إنشاء باستخدام الذكاء الاصطناعي
+            </button>
+        </div>
+        
+        <!-- Loading Indicator -->
+        <div id="loading" class="hidden text-center mb-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white mb-2"></div>
+            <p>جاري المعالجة...</p>
+        </div>
+        
+        <!-- Result Section -->
+        <div id="resultSection" class="hidden">
+            <h2 class="text-2xl font-bold mb-4 text-center">النتيجة</h2>
+            <div class="border border-gray-600 rounded-xl p-4 mb-6">
+                <img id="generatedImage" src="" alt="Generated result" class="w-full max-w-md mx-auto">
+            </div>
+            
+            <div class="bg-gray-800 p-4 rounded-xl mb-4">
+                <h3 class="font-bold mb-2">الوصف:</h3>
+                <p id="generatedCaption" class="text-gray-300">حقيبة أنيقة تناسب إطلالة المكتب العصرية! مثالية لمحبي الأناقة والراحة في آن واحد. #أزياء #إكسسوارات</p>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="downloadImage()" 
+                        class="bg-blue-600 text-white px-6 py-2 rounded-lg mr-2">
+                    تحميل الصورة
+                </button>
+                <button onclick="downloadCaption()" 
+                        class="bg-green-600 text-white px-6 py-2 rounded-lg">
+                    تحميل الوصف
+                </button>
+            </div>
+        </div>
+        
+        <!-- Test Button -->
+        <div class="text-center mt-8">
+            <button onclick="loadTestImages()" 
+                    class="bg-green-600 text-white px-6 py-2 rounded-lg">
+                استخدام صور الاختبار
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let productImage = null;
+        let backgroundImage = null;
+
+        // Handle image uploads
+        document.getElementById('productImage').addEventListener('change', function(e) {
+            if (e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    productImage = event.target.result;
+                    document.getElementById('productPreview').innerHTML = 
+                        `<img src="${event.target.result}" class="w-full h-32 object-cover rounded-lg">`;
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        document.getElementById('backgroundImage').addEventListener('change', function(e) {
+            if (e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    backgroundImage = event.target.result;
+                    document.getElementById('backgroundPreview').innerHTML = 
+                        `<img src="${event.target.result}" class="w-full h-32 object-cover rounded-lg">`;
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        // Load test images
+        function loadTestImages() {
+            // Use working public image URLs
+            productImage = 'https://images.unsplash.com/photo-1548700516-b13e2d1c9128?w=200&h=200&fit=crop';
+            backgroundImage = 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=300&fit=crop';
+            
+            document.getElementById('productPreview').innerHTML = 
+                `<img src="${productImage}" class="w-full h-32 object-cover rounded-lg">`;
+            document.getElementById('backgroundPreview').innerHTML = 
+                `<img src="${backgroundImage}" class="w-full h-32 object-cover rounded-lg">`;
+            document.getElementById('description').value = 'Put the bag in the woman\'s hand';
+        }
+
+        // Generate mock AI image
+        function generateImage() {
+            const description = document.getElementById('description').value;
+            
+            if (!productImage || !backgroundImage || !description.trim()) {
+                alert('يرجى تحميل الصورتين وإدخال وصف');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('generateBtn').disabled = true;
+
+            // Simulate AI processing
+            setTimeout(() => {
+                // Create a simple canvas image
+                const canvas = document.createElement('canvas');
+                canvas.width = 400;
+                canvas.height = 400;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw background
+                ctx.fillStyle = '#2D3748';
+                ctx.fillRect(0, 0, 400, 400);
+                
+                // Draw product
+                ctx.fillStyle = '#63B3ED';
+                ctx.fillRect(120, 120, 160, 160);
+                
+                // Add text
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('AI Generated', 200, 200);
+                
+                const imageDataUrl = canvas.toDataURL('image/png');
+                
+                // Show result
+                document.getElementById('generatedImage').src = imageDataUrl;
+                document.getElementById('resultSection').classList.remove('hidden');
+                
+                // Hide loading
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('generateBtn').disabled = false;
+            }, 2000);
+        }
+
+        // Download functions
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.href = document.getElementById('generatedImage').src;
+            link.download = 'ai-generated-image.png';
+            link.click();
+        }
+
+        function downloadCaption() {
+            const caption = document.getElementById('generatedCaption').textContent;
+            const blob = new Blob([caption], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'ai-caption.txt';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
