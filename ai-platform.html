@@ -153,47 +153,60 @@
         // Generate mock AI image
         function generateImage() {
             const description = document.getElementById('description').value;
+            const loadingElement = document.getElementById('loading');
+            const generateButton = document.getElementById('generateBtn');
+            const resultSection = document.getElementById('resultSection');
             
             if (!productImage || !backgroundImage || !description.trim()) {
                 alert('يرجى تحميل الصورتين وإدخال وصف');
                 return;
             }
 
-            // Show loading
-            document.getElementById('loading').classList.remove('hidden');
-            document.getElementById('generateBtn').disabled = true;
+            // Show loading and hide stale results while processing a new request
+            loadingElement.classList.remove('hidden');
+            generateButton.disabled = true;
+            resultSection.classList.add('hidden');
 
             // Simulate AI processing
             setTimeout(() => {
-                // Create a simple canvas image
-                const canvas = document.createElement('canvas');
-                canvas.width = 400;
-                canvas.height = 400;
-                const ctx = canvas.getContext('2d');
-                
-                // Draw background
-                ctx.fillStyle = '#2D3748';
-                ctx.fillRect(0, 0, 400, 400);
-                
-                // Draw product
-                ctx.fillStyle = '#63B3ED';
-                ctx.fillRect(120, 120, 160, 160);
-                
-                // Add text
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 20px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('AI Generated', 200, 200);
-                
-                const imageDataUrl = canvas.toDataURL('image/png');
-                
-                // Show result
-                document.getElementById('generatedImage').src = imageDataUrl;
-                document.getElementById('resultSection').classList.remove('hidden');
-                
-                // Hide loading
-                document.getElementById('loading').classList.add('hidden');
-                document.getElementById('generateBtn').disabled = false;
+                try {
+                    // Create a simple canvas image
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 400;
+                    canvas.height = 400;
+                    const ctx = canvas.getContext('2d');
+
+                    if (!ctx) {
+                        throw new Error('Canvas rendering is not supported in this browser.');
+                    }
+                    
+                    // Draw background
+                    ctx.fillStyle = '#2D3748';
+                    ctx.fillRect(0, 0, 400, 400);
+                    
+                    // Draw product
+                    ctx.fillStyle = '#63B3ED';
+                    ctx.fillRect(120, 120, 160, 160);
+                    
+                    // Add text
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 20px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('AI Generated', 200, 200);
+                    
+                    const imageDataUrl = canvas.toDataURL('image/png');
+                    
+                    // Show result
+                    document.getElementById('generatedImage').src = imageDataUrl;
+                    resultSection.classList.remove('hidden');
+                } catch (error) {
+                    console.error('Image generation failed:', error);
+                    alert('حدث خطأ أثناء إنشاء الصورة. يرجى المحاولة مرة أخرى.');
+                } finally {
+                    // Ensure UI is restored even if generation fails
+                    loadingElement.classList.add('hidden');
+                    generateButton.disabled = false;
+                }
             }, 2000);
         }
 
