@@ -1,220 +1,194 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Advertising Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'gray-900': '#1a202c',
-                        'gray-800': '#2d3748',
-                        'gray-700': '#4a5568',
-                        'gray-600': '#718096',
-                    }
-                }
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام إدارة العمليات اللوجستية | AdsbyAi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1E3A8A",
+            success: "#16A34A",
+            danger: "#DC2626",
+            soft: "#F8FAFC",
+            card: "#F1F5F9"
+          }
         }
-    </script>
-    <style>
-        .rtl { direction: rtl; }
-        .ltr { direction: ltr; }
-    </style>
+      }
+    };
+  </script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <div class="max-w-4xl mx-auto p-6">
-        <h1 class="text-3xl font-bold text-center mb-8">منصة الإعلانات بالذكاء الاصطناعي</h1>
-        
-        <!-- Upload Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="border-2 border-dashed border-gray-600 rounded-xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4">تحميل صورة المنتج</h3>
-                <input type="file" id="productImage" accept="image/*" class="hidden">
-                <button onclick="document.getElementById('productImage').click()" 
-                        class="bg-white text-gray-900 px-4 py-2 rounded-lg">
-                    اختر صورة
-                </button>
-                <div id="productPreview" class="mt-4"></div>
-            </div>
-            
-            <div class="border-2 border-dashed border-gray-600 rounded-xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4">تحميل صورة الخلفية</h3>
-                <input type="file" id="backgroundImage" accept="image/*" class="hidden">
-                <button onclick="document.getElementById('backgroundImage').click()" 
-                        class="bg-white text-gray-900 px-4 py-2 rounded-lg">
-                    اختر صورة
-                </button>
-                <div id="backgroundPreview" class="mt-4"></div>
-            </div>
+<body class="bg-soft text-slate-800">
+  <div class="max-w-7xl mx-auto p-6 lg:p-10 space-y-8">
+    <header class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 lg:p-8">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <p class="text-primary font-semibold text-sm">Logistics Operating System Blueprint</p>
+          <h1 class="text-2xl lg:text-4xl font-extrabold mt-1">نظام متكامل منخفض الكلفة وقابل للتطوير</h1>
+          <p class="text-slate-600 mt-3 max-w-3xl">
+            هذا النموذج يترجم رؤيتك إلى مواصفات تنفيذية واضحة: هيكل قاعدة البيانات، سير العمل، المعادلات، التقارير، الفاتورة PDF،
+            النسخ الاحتياطي، التقنية المقترحة، والتصميم العصري.
+          </p>
         </div>
-        
-        <!-- Description -->
-        <div class="mb-6">
-            <label class="block text-lg font-semibold mb-2">صف التفاعل المطلوب</label>
-            <textarea id="description" rows="3" 
-                      class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg text-white"
-                      placeholder="مثال: ضع الحقيبة على رأس المرأة في الصورة الثانية"></textarea>
+        <button class="bg-primary text-white px-5 py-3 rounded-xl font-semibold hover:bg-blue-900 transition">إضافة عملية جديدة</button>
+      </div>
+    </header>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      <article class="bg-white border border-slate-200 rounded-2xl p-5">
+        <p class="text-slate-500 text-sm">العمليات المفتوحة</p>
+        <p class="text-3xl font-bold mt-2">37</p>
+      </article>
+      <article class="bg-white border border-slate-200 rounded-2xl p-5">
+        <p class="text-slate-500 text-sm">العمليات المكتملة</p>
+        <p class="text-3xl font-bold mt-2">112</p>
+      </article>
+      <article class="bg-white border border-slate-200 rounded-2xl p-5">
+        <p class="text-slate-500 text-sm">أرباح الشهر (IQD)</p>
+        <p class="text-3xl font-bold mt-2 text-success">12,450,000</p>
+      </article>
+      <article class="bg-white border border-slate-200 rounded-2xl p-5">
+        <p class="text-slate-500 text-sm">إجمالي الذمم المدينة</p>
+        <p class="text-3xl font-bold mt-2 text-danger">4,120,000</p>
+      </article>
+    </section>
+
+    <main class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <section class="xl:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 space-y-6">
+        <h2 class="text-xl font-bold text-primary">أولاً: هيكل قاعدة البيانات (ERD منطقي)</h2>
+
+        <div class="overflow-auto">
+          <table class="min-w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+            <thead class="bg-card text-slate-700">
+              <tr>
+                <th class="p-3 text-right">الجدول</th>
+                <th class="p-3 text-right">الحقول الأساسية</th>
+                <th class="p-3 text-right">العلاقات</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="p-3 font-semibold">users</td>
+                <td class="p-3">id, name, username, password_hash, created_at</td>
+                <td class="p-3">1:N مع invoices (created_by)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">invoices</td>
+                <td class="p-3">id, invoice_number, customer_name, phone, address, agreed_price_iqd, created_at, status</td>
+                <td class="p-3">1:1 مع operation_details و accounting، 1:N مع payments و images</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">operation_details</td>
+                <td class="p-3">id, invoice_id, service_type, goods_type, total_weight, total_volume, general_notes</td>
+                <td class="p-3">FK invoice_id</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">accounting</td>
+                <td class="p-3">id, invoice_id, cost_to_china_usd, exchange_rate, shipping_type, shipping_cost, commission_percentage, commission_value, other_expenses, total_cost_iqd, agreed_price_iqd, total_received, remaining_amount, profit</td>
+                <td class="p-3">FK invoice_id</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">payments</td>
+                <td class="p-3">id, invoice_id, amount, payment_type, payment_date, notes</td>
+                <td class="p-3">FK invoice_id (متعدد الدفعات)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">images</td>
+                <td class="p-3">id, invoice_id, factory_invoice_image, goods_image, packaging_image</td>
+                <td class="p-3">FK invoice_id</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
-        <!-- Generate Button -->
-        <div class="text-center mb-8">
-            <button onclick="generateImage()" 
-                    id="generateBtn"
-                    class="bg-white text-gray-900 px-8 py-3 rounded-xl font-bold text-lg hover:bg-gray-200 transition-colors">
-                إنشاء باستخدام الذكاء الاصطناعي
-            </button>
+
+        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl text-xs overflow-auto">
+<pre>ERD (مختصر):
+users (1) ──&lt; invoices (N)
+invoices (1) ── (1) operation_details
+invoices (1) ── (1) accounting
+invoices (1) ──&lt; payments (N)
+invoices (1) ──&lt; images (N)</pre>
         </div>
-        
-        <!-- Loading Indicator -->
-        <div id="loading" class="hidden text-center mb-8">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white mb-2"></div>
-            <p>جاري المعالجة...</p>
+
+        <h2 class="text-xl font-bold text-primary">ثانياً: سير العمل (Workflow)</h2>
+        <ol class="list-decimal pr-6 space-y-2 text-slate-700">
+          <li>إنشاء عميل/عملية جديدة → توليد رقم فاتورة تلقائي بصيغة C0001.</li>
+          <li>إدخال تفاصيل الخدمة والبضاعة والوزن/الحجم والملاحظات.</li>
+          <li>إدخال التكاليف (الصين/الشحن/العمولة/المصاريف الأخرى).</li>
+          <li>حساب تلقائي للكلفة الكلية والربح والمتبقي.</li>
+          <li>تسجيل الدفعة الأولى وتحديث إجمالي المستلم.</li>
+          <li>عند وصول الشحنة: تسجيل الدفعة الثانية وتحديث الحالة.</li>
+          <li>عند تسديد كامل المبلغ: الحالة تتغير إلى "مكتملة" تلقائياً.</li>
+          <li>إصدار فاتورة PDF، حفظها على السيرفر وإتاحتها لإعادة التحميل.</li>
+        </ol>
+
+        <h2 class="text-xl font-bold text-primary">ثالثاً: الحسابات والمعادلات</h2>
+        <div class="grid md:grid-cols-2 gap-3 text-sm">
+          <div class="bg-card rounded-xl p-4">cost_to_china_iqd = cost_to_china_usd × exchange_rate</div>
+          <div class="bg-card rounded-xl p-4">commission_value = cost_to_china_iqd × commission_percentage / 100</div>
+          <div class="bg-card rounded-xl p-4">total_cost_iqd = cost_to_china_iqd + shipping_cost + other_expenses + commission_value</div>
+          <div class="bg-card rounded-xl p-4">remaining_amount = agreed_price_iqd - total_received</div>
+          <div class="bg-card rounded-xl p-4 md:col-span-2">profit = agreed_price_iqd - total_cost_iqd</div>
         </div>
-        
-        <!-- Result Section -->
-        <div id="resultSection" class="hidden">
-            <h2 class="text-2xl font-bold mb-4 text-center">النتيجة</h2>
-            <div class="border border-gray-600 rounded-xl p-4 mb-6">
-                <img id="generatedImage" src="" alt="Generated result" class="w-full max-w-md mx-auto">
-            </div>
-            
-            <div class="bg-gray-800 p-4 rounded-xl mb-4">
-                <h3 class="font-bold mb-2">الوصف:</h3>
-                <p id="generatedCaption" class="text-gray-300">حقيبة أنيقة تناسب إطلالة المكتب العصرية! مثالية لمحبي الأناقة والراحة في آن واحد. #أزياء #إكسسوارات</p>
-            </div>
-            
-            <div class="text-center">
-                <button onclick="downloadImage()" 
-                        class="bg-blue-600 text-white px-6 py-2 rounded-lg mr-2">
-                    تحميل الصورة
-                </button>
-                <button onclick="downloadCaption()" 
-                        class="bg-green-600 text-white px-6 py-2 rounded-lg">
-                    تحميل الوصف
-                </button>
-            </div>
-        </div>
-        
-        <!-- Test Button -->
-        <div class="text-center mt-8">
-            <button onclick="loadTestImages()" 
-                    class="bg-green-600 text-white px-6 py-2 rounded-lg">
-                استخدام صور الاختبار
-            </button>
-        </div>
-    </div>
 
-    <script>
-        let productImage = null;
-        let backgroundImage = null;
+        <h2 class="text-xl font-bold text-primary">رابعاً: التقارير والتحليلات (Dashboard)</h2>
+        <ul class="grid md:grid-cols-2 gap-2 text-sm text-slate-700">
+          <li class="bg-card rounded-lg p-3">عدد العمليات المفتوحة والمكتملة</li>
+          <li class="bg-card rounded-lg p-3">أرباح اليوم وأرباح الشهر</li>
+          <li class="bg-card rounded-lg p-3">إجمالي المبالغ المستلمة</li>
+          <li class="bg-card rounded-lg p-3">إجمالي الذمم المدينة</li>
+          <li class="bg-card rounded-lg p-3">مخطط شهري للأرباح</li>
+          <li class="bg-card rounded-lg p-3">مخطط حركة الكاش (داخل/خارج)</li>
+        </ul>
+      </section>
 
-        // Handle image uploads
-        document.getElementById('productImage').addEventListener('change', function(e) {
-            if (e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    productImage = event.target.result;
-                    document.getElementById('productPreview').innerHTML = 
-                        `<img src="${event.target.result}" class="w-full h-32 object-cover rounded-lg">`;
-                };
-                reader.readAsDataURL(e.target.files[0]);
-            }
-        });
+      <aside class="space-y-6">
+        <section class="bg-white border border-slate-200 rounded-2xl p-6">
+          <h3 class="font-bold text-primary mb-3">خامساً: نظام الفاتورة PDF</h3>
+          <ul class="text-sm text-slate-700 space-y-2">
+            <li>• الشعار + رقم الفاتورة + التاريخ</li>
+            <li>• بيانات العميل (الاسم/الهاتف)</li>
+            <li>• المبلغ المتفق، المستلم، المتبقي</li>
+            <li>• طريقة الدفع وتوقيع الشركة</li>
+            <li>• حفظ تلقائي داخل مجلد invoices/ بصيغة PDF</li>
+          </ul>
+        </section>
 
-        document.getElementById('backgroundImage').addEventListener('change', function(e) {
-            if (e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    backgroundImage = event.target.result;
-                    document.getElementById('backgroundPreview').innerHTML = 
-                        `<img src="${event.target.result}" class="w-full h-32 object-cover rounded-lg">`;
-                };
-                reader.readAsDataURL(e.target.files[0]);
-            }
-        });
+        <section class="bg-white border border-slate-200 rounded-2xl p-6">
+          <h3 class="font-bold text-primary mb-3">سادساً: التخزين والنسخ الاحتياطي</h3>
+          <ul class="text-sm text-slate-700 space-y-2">
+            <li>• Local Storage للصور داخل السيرفر.</li>
+            <li>• ضغط تلقائي للصور عند الرفع.</li>
+            <li>• نسخ احتياطي يومي لقاعدة البيانات (cron).</li>
+            <li>• نسخة أسبوعية مضغوطة قابلة للتنزيل.</li>
+          </ul>
+        </section>
 
-        // Load test images
-        function loadTestImages() {
-            // Use working public image URLs
-            productImage = 'https://images.unsplash.com/photo-1548700516-b13e2d1c9128?w=200&h=200&fit=crop';
-            backgroundImage = 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=300&fit=crop';
-            
-            document.getElementById('productPreview').innerHTML = 
-                `<img src="${productImage}" class="w-full h-32 object-cover rounded-lg">`;
-            document.getElementById('backgroundPreview').innerHTML = 
-                `<img src="${backgroundImage}" class="w-full h-32 object-cover rounded-lg">`;
-            document.getElementById('description').value = 'Put the bag in the woman\'s hand';
-        }
+        <section class="bg-white border border-slate-200 rounded-2xl p-6">
+          <h3 class="font-bold text-primary mb-3">سابعاً: التقنية المقترحة (منخفضة الكلفة)</h3>
+          <div class="text-sm text-slate-700 space-y-2">
+            <p><span class="font-semibold">Backend:</span> Laravel 11 (PHP 8.3)</p>
+            <p><span class="font-semibold">Frontend:</span> Blade + Tailwind (مرحلة أولى)</p>
+            <p><span class="font-semibold">Database:</span> MySQL 8</p>
+            <p><span class="font-semibold">PDF:</span> barryvdh/laravel-dompdf</p>
+            <p><span class="font-semibold">Hosting:</span> VPS بقيمة 5-10$ شهرياً</p>
+          </div>
+        </section>
 
-        // Generate mock AI image
-        function generateImage() {
-            const description = document.getElementById('description').value;
-            
-            if (!productImage || !backgroundImage || !description.trim()) {
-                alert('يرجى تحميل الصورتين وإدخال وصف');
-                return;
-            }
-
-            // Show loading
-            document.getElementById('loading').classList.remove('hidden');
-            document.getElementById('generateBtn').disabled = true;
-
-            // Simulate AI processing
-            setTimeout(() => {
-                // Create a simple canvas image
-                const canvas = document.createElement('canvas');
-                canvas.width = 400;
-                canvas.height = 400;
-                const ctx = canvas.getContext('2d');
-                
-                // Draw background
-                ctx.fillStyle = '#2D3748';
-                ctx.fillRect(0, 0, 400, 400);
-                
-                // Draw product
-                ctx.fillStyle = '#63B3ED';
-                ctx.fillRect(120, 120, 160, 160);
-                
-                // Add text
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 20px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('AI Generated', 200, 200);
-                
-                const imageDataUrl = canvas.toDataURL('image/png');
-                
-                // Show result
-                document.getElementById('generatedImage').src = imageDataUrl;
-                document.getElementById('resultSection').classList.remove('hidden');
-                
-                // Hide loading
-                document.getElementById('loading').classList.add('hidden');
-                document.getElementById('generateBtn').disabled = false;
-            }, 2000);
-        }
-
-        // Download functions
-        function downloadImage() {
-            const link = document.createElement('a');
-            link.href = document.getElementById('generatedImage').src;
-            link.download = 'ai-generated-image.png';
-            link.click();
-        }
-
-        function downloadCaption() {
-            const caption = document.getElementById('generatedCaption').textContent;
-            const blob = new Blob([caption], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'ai-caption.txt';
-            link.click();
-            URL.revokeObjectURL(url);
-        }
-    </script>
+        <section class="bg-white border border-slate-200 rounded-2xl p-6">
+          <h3 class="font-bold text-primary mb-3">ثامناً: مراحل التنفيذ والتكلفة</h3>
+          <ul class="text-sm text-slate-700 space-y-2">
+            <li>• المرحلة 1 (2-3 أسابيع): الأساس + CRUD + الحسابات.</li>
+            <li>• المرحلة 2 (1-2 أسبوع): Dashboard + PDF + الصلاحيات.</li>
+            <li>• المرحلة 3 (1 أسبوع): النسخ الاحتياطي والتحسينات.</li>
+            <li>• تكلفة تقديرية: 4-6 أسابيع تطوير + استضافة شهرية منخفضة.</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+  </div>
 </body>
 </html>
